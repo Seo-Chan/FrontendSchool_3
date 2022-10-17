@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="myDiv">div 입니다!</div>
+    <div class="myDiv">div 입니다!</div>
+    <div class="myDiv">div 입니다!</div>
+    <div class="myDiv">div 입니다!</div>
+    <div class="myDiv">div 입니다!</div>
+
+    // 점심 식단
+    <article id="container">
+        <ul>
+            <li>탕수육</li>
+            <li class="item-second">유산슬</li>
+            <li>짜장면</li>
+        </ul>
+    </article>
+
+    // 저녁 식단
+    <article>
+        <ul>
+            <li>된장국</li>
+            <li class="item-second">김치찌게</li>
+            <li>해장국</li>
+        </ul>
+    </article>
+    <button>Make me BLUE!</button>
+
+    <script>
+        // // id로 접근하는 방법
+        // console.log(document.getElementById('myDiv'));
+        // // 찾아서 저장하고 사용한다.
+        // const myDiv = document.getElementById('myDiv');
+        
+        // 태그로 접근하는 방법
+        // console.log(document.getElementsByTagName('div'));
+
+        // // 클래스로 접근하는 방법
+        // console.log(document.getElementsByClassName('myDiv'));
+        
+        // const container = document.getElementById("container");
+        // console.log(container.getElementsByClassName('item-second')[0]); // container 상수 선언 후 document대신 써도됨
+        // console.log(document.getElementsByTagName('li')[0]); // 꼭 document에서부터 시작할 필요 없음. 자스가 해석하는 속도가 빨라짐
+
+        // console.log(document.querySelector('.item-second'));
+        const myBtn = document.querySelector("button");
+
+        myBtn.addEventListener('click', function(){
+
+        // blue 라는 클래스의 속성 값을 지정 할 수 있습니다.
+	    myBtn.classList.add("blue");
+         // myBtn.classList.remove(“blue”);     클래스를 제거합니다.
+	// myBtn.classList.toggle(“blue”);     클래스를 토글합니다. 없으면 넣어주고, 있으면 제거합니다. (css처럼 효과줄때. 버튼누르면 색이 변한다든가)
+	// myBtn.classList.contains(“blue”);   해당하는 클래스가 있는지 확인합니다. console.log로 감싸줘야 뜸
+    </script>
+</body>
+</html>
