@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .target {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            transition: .2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="target"></div>
+    <script>
+        const target = document.querySelector('.target');
+        let posX = 0;
+        let posY = 0;
+
+        document.addEventListener('keydown', move);
+
+        function move(event) {
+            const keyName = event.key;
+            console.log(keyName);
+            if (keyName === 'ArrowRight') {
+                posX += 5;
+                target.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+            }
+            if (keyName === 'ArrowLeft') {
+                posX -= 5;
+                target.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+            }
+            if (keyName === 'ArrowDown') {
+                posY += 5;
+                target.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+            }
+            if (keyName === 'ArrowUp') {
+                posY -= 5;
+                target.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+            }
+        }
+    </script>
+</body>
+</html>
