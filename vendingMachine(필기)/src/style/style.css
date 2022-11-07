@@ -248,6 +248,10 @@ body {
     height: 368px;
 }
 
+.my-info .list-item-staged li {
+    overflow: hidden;
+    padding: 8px;
+}
 
 .my-info .txt-total {
     display: block;
