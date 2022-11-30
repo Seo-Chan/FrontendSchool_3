@@ -2448,3 +2448,802 @@ function solution(N, stages) {
 
 solution(5, [2, 1, 2, 6, 2, 4, 3, 3]);
 ```
+
+
+# 간단한 코드 스니펫
+
+```js
+Infinity - Infinity;
+Math.ceil(); //올림
+Math.floor(); //내림
+```
+
+ ## 배열의 평균값
+
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/120817
+
+```js
+function solution(numbers) {
+    // 배열이 빈배열이면 error
+    return numbers.reduce((a, c) => a + c, 0) / numbers.length;
+}
+
+function solution(numbers) {
+    // 아래와 같이 0으로 초기화를 꼭 해주세요.
+    return numbers.reduce((a, c) => a + c, 0) / numbers.length;
+}
+```
+
+## 문자열 안에 문자열
+https://school.programmers.co.kr/learn/courses/30/lessons/120908
+
+```js
+// 'abcdefg'.indexOf('cde')
+// 2
+// 'abcdefg'.indexOf('zee')
+// -1
+function solution(str1, str2) {
+    if (str1.indexOf(str2) === -1){
+        return 2
+    }
+    return 1
+}
+
+function solution(str1, str2) {
+    return str1.indexOf(str2) === -1 ? 2 : 1
+}
+
+function solution(str1, str2) {
+    return str1.includes(str2) ? 1 : 2
+}
+
+function solution(str1, str2) {
+    return str1.split(str2).length > 1 ? 1 : 2
+}
+```
+
+## 숨어있는 숫자의 덧셈 (1)
+https://school.programmers.co.kr/learn/courses/30/lessons/120851
+
+```js
+Array.from("aAb1B2cC34oOp");
+"aAb1B2cC34oOp".split("");
+Array.from("aAb1B2cC34oOp").map((v) => +v);
+Array.from("aAb1B2cC34oOp")
+    .map((v) => +v)
+    .filter((v) => !Number.isNaN(v));
+// 순서를 바꿔도 어차피 map으로 숫자를 변환해야 합니다.
+// Array.from('aAb1B2cC34oOp').filter(v => +v)
+Array.from("aAb1B2cC34oOp")
+    .map((v) => +v)
+    .filter((v) => !Number.isNaN(v))
+    .reduce((a, c) => a + c, 0);
+
+function solution(my_string) {
+    return Array.from(my_string)
+        .map((v) => +v)
+        .filter((v) => !Number.isNaN(v))
+        .reduce((a, c) => a + c, 0);
+}
+
+"aAb1B2cC34oOp".replace(/[a-zA-Z]/g, '!')
+// '!!!1!2!!34!!!'
+"aAb1B2cC34oOp".replace(/[a-zA-Z]/g, '')
+// '1234'
+"aAb1B2cC34oOp".replace(/[^\d]/g, '')
+// '1234'
+"aAb1B2cC34oOp".replace(/[\D]/g, '')
+// '1234'
+"abcAb1B2abcC34oOp".replaceAll('abc', '')
+// 'Ab1B2C34oOp'
+"abcAb1B2abcC34oOp".replaceAll(/[a-zA-Z]/g, '')
+// '1234'
+"aAb1B2cC34oOp".match(/[\d]/g)
+// ['1', '2', '3', '4']
+
+function solution(my_string) {
+    return my_string.match(/[\d]/g)
+        .map((v) => +v)
+        .reduce((a, c) => a + c, 0);
+}
+```
+
+## 진료 순서 정하기 (*)
+https://school.programmers.co.kr/learn/courses/30/lessons/120835
+
+```js
+// 원본이 변경이 되어버리기 때문에 원하는 결과가 안나옵니다.
+function solution(emergency) {
+    const sorted = emergency.sort((a, b) => b - a);
+    return sorted.map((v) => indexOf(v) + 1);
+}
+
+let 원본 = [3, 76, 24];
+let 사본 = 원본.sort((a, b) => b - a);
+사본;
+// [76, 24, 3]
+원본;
+// [76, 24, 3]
+
+function solution(emergency) {
+    const sorted = [...emergency].sort((a, b) => b - a);
+    return emergency.map((v) => sorted.indexOf(v) + 1);
+}
+
+function solution(emergency) {
+    const sorted = emergency.slice().sort((a, b) => b - a);
+    return emergency.map((v) => sorted.indexOf(v) + 1);
+}
+
+// 깊은 복사
+// 전개 구문으로 복사
+// slice로 복사
+// JSON.stringify()로 복사
+// Object.assign()으로 복사
+// Lodash 라이브러리 사용
+```
+
+## 문자열 밀기
+https://school.programmers.co.kr/learn/courses/30/lessons/120921
+
+```js
+// slice나 for이용하면 어렵게 풀게 됩니다.
+("ohell" + "ohell").indexOf("hello")
+("lohel" + "lohel").indexOf("hello")
+
+function solution(A, B) {
+    return (B+B).indexOf(A);
+}
+
+let solution = (A, B) =>(B+B).indexOf(A);
+
+// 회전 초밥 문제 처럼 몇 번씩 순회를 돌아야 하고, 중간에 먹는 초밥이 사라진다라고 하면 for를 이용합니다.
+// 아래와 같이 for 문 안에 length가 줄어드는 것을 '이용'하셔야 합니다.
+l = [10, 20, 30, 40, 50]
+for (let i = 0; i < l.length; i++) {
+    console.log(l.pop())
+}
+```
+
+## 특이한 정렬 (*)
+https://school.programmers.co.kr/learn/courses/30/lessons/120880
+
+```js
+// 일반 숫자 정렬
+[10, 20, 30, 40, 32, 35, 37].sort((a, b) => a - b)
+
+// 어떠한 값 기준 정렬
+[10, 20, 30, 40, 32, 35, 37].sort((a, b) => Math.abs(a - 35) - Math.abs(b - 35))
+
+// 어떠한 값 기준 정렬, 값이 같을 때에는 뒤에 ||
+[10, 20, 30, 40, 32, 35, 37].sort((a, b) => Math.abs(a - 35) - Math.abs(b - 35) || b - a)
+
+function solution(numlist, n) {
+    return numlist.sort((a, b) => Math.abs(a - n) - Math.abs(b - n) || b - a);
+}
+```
+
+## 다항식 더하기 (*)
+https://school.programmers.co.kr/learn/courses/30/lessons/120863
+
+
+```js
+[3, 10].join("x + ");
+// '3x + 10'
+
+"3x + 7 + x".split(" + ");
+
+"3x + 7 + x".split(" + ").filter((v) => v.includes("x"));
+
+// x 항만 골라내기
+"3x + 7 + x"
+    .split(" + ")
+    .filter((v) => v.includes("x"))
+    .map((v) => v.replace("x", "") || "1"); // x가 공백으로 대체되며 false가 됨 그러므로 뒤의 값인 1이 나옴
+
+"3x + 7 + x"
+    .split(" + ")
+    .filter((v) => v.includes("x"))
+    .map((v) => +v.replace("x", "") || 1);
+
+"3x + 7 + x"
+    .split(" + ")
+    .filter((v) => v.includes("x"))
+    .map((v) => +v.replace("x", "") || 1)
+    .reduce((a, c) => a + c, 0);
+
+// 숫자 항만 골라내기
+"3x + 7 + x"
+    .split(" + ")
+    .filter((v) => !v.includes("x"))
+    .map((v) => +v)
+    .reduce((a, c) => a + c, 0);
+
+function solution(polynomial) {
+    answer = [];
+    answer.push(
+        polynomial
+            .split(" + ")
+            .filter((v) => v.includes("x"))
+            .map((v) => +v.replace("x", "") || 1)
+            .reduce((a, c) => a + c, 0)
+    );
+    answer.push(
+        polynomial
+            .split(" + ")
+            .filter((v) => !v.includes("x"))
+            .map((v) => +v)
+            .reduce((a, c) => a + c, 0)
+    );
+    if (answer[0] === 1 && answer[1] !== 0) {
+        return `x + ${answer[1]}`;
+    }
+    if (answer[0] === 1 && answer[1] === 0) {
+        return `x`;
+    }
+    if (answer[0] !== 1 && answer[1] === 0) {
+        return `${answer[0]}x`;
+    }
+    if (answer[0] === 0 && answer[1] !== 0) {
+        return `${answer[1]}`;
+    }
+    if (answer[0] === 0 && answer[1] === 0) {
+        return ``;
+    }
+    return answer.join("x + ");
+}
+
+// 코드 간소화
+function solution(polynomial) {
+    let answer = [];
+    answer.push(
+        polynomial
+            .split(" + ")
+            .filter((v) => v.includes("x"))
+            .map((v) => +v.replace("x", "") || 1)
+            .reduce((a, c) => a + c, 0)
+    );
+    answer.push(
+        polynomial
+            .split(" + ")
+            .filter((v) => !v.includes("x"))
+            .map((v) => +v)
+            .reduce((a, c) => a + c, 0)
+    );
+
+    let result = []
+    if (answer[0]) result.push(`${answer[0] === 1 ? "" : answer[0]}x`);
+    if (answer[1]) result.push(answer[1]);
+    // [10].join(' + ')
+    // '10'
+    return result.join(' + ')
+}
+```
+
+## OX퀴즈 (*)
+https://school.programmers.co.kr/learn/courses/30/lessons/120907
+
+```js
+// 코딩테스트 중 eval을 사용하지 못하도록 막아놓은 곳이 있습니다. 참고하세요.
+
+eval()
+eval('10 + 10')
+// 20
+eval('10 - 3')
+// 7
+eval("5 + 6 = 11") // error
+eval("5 + 6 == 11") // true
+
+quiz.split(' = ')[0]
+// '5 + 6'
++quiz.split(' = ')[1] 
+// 11
+
+function solution(quiz) {
+    let result = []
+    for (item of quiz){
+        const 연산식 = eval(item.split(' = ')[0])
+        const 결과값 = +item.split(' = ')[1]
+        result.push(eval(연산식) === 결과값 ? 'O' : 'X')
+    }
+    return result
+}
+```
+
+## 겹치는 선분의 길이 (*)
+https://school.programmers.co.kr/learn/courses/30/lessons/120876
+
+```python
+def solution(lines):
+    sets = [set(range(min(l), max(l))) for l in lines]
+    return len(sets[0] & sets[1] | sets[0] & sets[2] | sets[1] & sets[2])
+```
+
+```js
+function solution(lines) {
+    // 100이 0, 101은 1
+    // 99는 -1, 98은 -2
+    let line = Array(201).fill(0); // 0 포함 201개
+    for (let [i, j] of lines) {
+        for (; i < j; i++) {
+            line[100 + i]++;
+        }
+    }
+    return line.filter((v) => v >= 2).length;
+}
+
+// 큰값 = Math.max(...lines.flat())
+// 작은값 = Math.min(...lines.flat())
+// Math.max([[0, 1], [2, 5], [3, 9]])
+// NaN
+// let value = [[0, 1], [2, 5], [3, 9]]
+// let value2 = [[0, [1, 2]], [2, 5], [3, 9]]
+// value.flat()
+// [0, 1, 2, 5, 3, 9]
+// value2.flat()
+// [0, Array(2), 2, 5, 3, 9]
+// value2.flat(Infinity)
+// [0, 1, 2, 2, 5, 3, 9]
+// Math.max(...value2.flat(Infinity))
+// 9
+```
+
+## 가사 검색 (*********)
+https://school.programmers.co.kr/learn/courses/30/lessons/60060
+
+```js
+// 카카오 2020년 공채문제 4번
+
+
+// -- section 1 --
+words   : ["frodo", "front", "frost", "frozen", "frame", "kakao"]	
+queries : ["fro??", "????o", "fr???", "fro???", "pro?"]
+result  : [3, 2, 4, 1, 0]
+
+"fro??"
+["frodo", "front", "frost", "frozen", "frame", "kakao"] // -> 3
+
+"????o"
+["frodo", "front", "frost", "frozen", "frame", "kakao"] // -> 2
+
+"fr???"
+["frodo", "front", "frost", "frozen", "frame", "kakao"] // -> 4
+
+"frodo".match(/fro../g)
+// ['frodo']
+"frodot".match(/fro../g)
+// ['frodo']
+"frotdot".match(/fro../g)
+// ['frotd']
+"ftrotdot".match(/fro../g)
+// null
+"aafrotdot".match(/fro../g)
+// ['frotd']
+"abcdo".match(/....o/g)
+// ['abcdo']
+"abcdok".match(/....o/g)
+// ['abcdo']
+"dok".match(/....o/g)
+// null
+
+
+// -- section 2 --
+let 패턴 = new RegExp('fro..', 'g')
+"frodo".match(패턴)
+// ['frodo']
+"ftrotdot".match(패턴)
+// null
+
+let 패턴 = new RegExp('fro..', 'g')
+패턴.test("frodo") // 우리한테 필요한 것은 boolean 값
+// true
+
+
+// 코드 시작
+
+let words = ["frodo", "front", "frost", "frozen", "frame", "kakao"]	
+let queries = ["fro??", "????o", "fr???", "fro???", "pro?"]
+
+let q = queries[0].replaceAll('?', '.')
+console.log(q)
+let pattern = new RegExp(q, 'g')
+let count = 0
+for (let word of words){
+    if (pattern.test(word)){
+        count++
+    }
+}
+console.log(count)
+
+// 코드 끝
+
+// true, false를 반복합니다.
+pattern.test(words[0])
+pattern.test(words[0])
+pattern.test(words[0])
+pattern.test(words[0])
+pattern.test(words[0])
+pattern.test(words[0])
+
+// 따라서 아래 코드를 모두 판별하고 싶을 때에는
+// 패턴을 동적으로 할당해줘야 합니다.
+pattern.test(words[1])
+pattern.test(words[2])
+pattern.test(words[3])
+pattern.test(words[4])
+pattern.test(words[5])
+
+
+// 코드 시작
+
+// 따라서 길이도 체크를 해주어야 합니다.
+function solution(words, queries){
+    let q = queries[0].replaceAll('?', '.')
+    let count = 0
+    for (let word of words){
+        const pattern = new RegExp(q, 'g')
+        // 길이 체크를 안했을 경우 frozen이 true가 됩니다.
+        if (pattern.test(word) && q.length === word.length){
+            count++
+        }
+    }
+    console.log(count)
+}
+
+solution(
+    ["frodo", "front", "frost", "frozen", "frame", "kakao"], 
+    ["fro??", "????o", "fr???", "fro???", "pro?"]
+)
+
+// 코드 끝
+
+
+// -- section 3 --
+function solution(words, queries){
+    let result = []
+    for (let q of queries){
+        q = q.replaceAll('?', '.')
+        let count = 0
+        for (let word of words){
+            const pattern = new RegExp(q, 'g')
+            // 길이 체크를 안했을 경우 frozen이 true가 됩니다.
+            if (pattern.test(word) && q.length === word.length){
+                count++
+            }
+        }
+        result.push(count)
+    }
+    return result
+}
+
+solution(
+    ["frodo", "front", "frost", "frozen", "frame", "kakao"], 
+    ["fro??", "????o", "fr???", "fro???", "pro?"]
+)
+
+// -- section 4 --
+// 4번이니까, 난이도가 4/5니까, 정규표현식으로 풀리지 않을 것이다.
+// 문자열 관련 알고리즘 검색 -> https://izmirprogramming.tistory.com/8 등
+// 대부분은 class 형태의 링크드 리스트가 답
+// '트라이 알고리즘'을 사용해야겠다!
+
+/*
+패턴 : 'fro..'
+'frodo'
+{'f' : 다음object} count : 1
+{'r' : 다음object} count : 1
+{'o' : 다음object} count : 1 // 여기까지만 보면 됩니다.
+{'d' : 다음object} count : 1
+{'o' : 다음object} count : 1
+*/
+
+// {
+//     value : 'f'
+//     count : 1
+//     {
+//         value : 'r'
+//         count : 1
+//         {
+//             value : 'o'
+//             count : 1
+//             {
+//                 value : 'd'
+//                 count : 1
+//                 {
+//                     value : 'o'
+//                     count : 1
+//                 }
+//             }
+//         }
+//     }
+// }
+
+/*
+패턴 : 'fro..'
+'frodo', 'front'
+{'f' : 다음object} count : 2
+{'r' : 다음object} count : 2
+{'o' : 다음object} count : 2 // 여기까지만 보면 됩니다.
+{'d' : 다음object} count : 1, {'n' : 다음object} count : 1
+{'o' : 다음object} count : 1, {'t' : 다음object} count : 1
+*/
+
+// [{'f':2}, {'r':2}, {'o':2}, {'d':1, 'n':1}, {'o':1, 't':1}]
+// [[{}], [{},{}], [{},{},{}], [{},{},{},{}], [{},{},{},{},{}]...
+
+let 트라이 = []
+for (let i = 0; i < 10; i++) {
+    let insertArray = []
+    for (let j = 0; j < i + 1; j++) {
+        insertArray.push({})
+    }
+    트라이.push(insertArray)
+}
+
+트라이
+
+// [{…}] -> 0번째 인덱스인데 1글자가 들어가니까요.
+// [{…}, {…}]
+// [{…}, {…}, {…}]
+// [{…}, {…}, {…}, {…}]
+// [{…}, {…}, {…}, {…}, {…}]
+// [{…}, {…}, {…}, {…}, {…}, {…}]
+// ... 중략 ...
+
+function solution (words){
+    let 트라이 = []
+    for (let i = 0; i < 10; i++) {
+        let insertArray = []
+        for (let j = 0; j < i + 1; j++) {
+            insertArray.push({})
+        }
+        트라이.push(insertArray)
+    }
+
+    for (const word of words) {
+        for (const index in word) {
+            let s = word[index]
+            // console.log(s)
+            if(s in 트라이[word.length-1][index]){
+                트라이[word.length-1][index][s] += 1
+            } else {
+                트라이[word.length-1][index][s] = 1
+            }
+        }
+    }
+    return 트라이
+}
+
+solution(['frodo', 'front'])
+solution(["frodo", "front", "frost", "frozen", "frame", "kakao"])
+
+
+// -- section 5 --
+
+// Tree로 해결하는 방법(대부분의 검색 효율성은 Tree 문제)
+// 단어 문제이기 때문에 트라이라는 알고리즘 선택
+
+// 하나의 레벨(층) 단위의 object 생성
+{
+    'f' : {
+        '연결노드' : 다음노드,
+        '개수' : 0
+    }
+}
+
+// 하나의 레벨(층) 단위의 object 생성
+// 레벨1 노드
+{
+    'f' : {
+        '연결노드' : 다음노드,
+        '개수' : 2,
+        '현재레벨' : 1 //문자열의 개수
+    }
+}
+
+// 레벨2 'f' 연결 노드
+{
+    'r' : {
+        '연결노드' : 다음노드,
+        '개수' : 2,
+        '현재레벨' : 2
+    }
+}
+
+// 레벨3 'r' 연결 노드
+{
+    'o' : {
+        '연결노드' : 다음노드,
+        '개수' : 2,
+        '현재레벨' : 3
+    }
+}
+
+// 레벨4 'o' 연결 노드
+{
+    'd' : {
+        '연결노드' : 다음노드,
+        '개수' : 1,
+        '현재레벨' : 4
+    },
+    'n' : {
+        '연결노드' : 다음노드,
+        '개수' : 1,
+        '현재레벨' : 4
+    }
+}
+
+// 레벨5 'd' 연결 노드
+{
+    'o' : {
+        '연결노드' : 다음노드,
+        '개수' : 1,
+        '현재레벨' : 5
+    }
+}
+
+// 레벨5 'n' 연결 노드
+{
+    't' : {
+        '연결노드' : 다음노드,
+        '개수' : 1,
+        '현재레벨' : 5
+    }
+}
+
+class 노드 {
+    constructor(){
+        this.children = {}
+        this.count = 0
+    }
+}
+
+class 트라이 {
+    constructor(){
+        this.root = new 노드()
+    }
+
+    insertData(word){
+        // 'frodo'
+        let current = this.root
+        current.count += 1
+        for (const s of word) {
+            //let child = current.children['f']
+            let child = current.children[s]
+
+            if(!child) {
+                child = new 노드()
+                current.children[s] = child
+            }
+
+            child.count += 1
+            current = child
+        }
+    }
+
+    search(query){
+        let current = this.root
+        for (const q of query) {
+            if(q === '?') {
+                return current.count
+            } else if (!current.children[q]){
+                return 0;
+            }
+            current = current.children[q]
+        }
+    }
+}
+
+function solution(words, queries){
+    answer = []
+
+    const 트라이배열 = Array(11)
+    const 트라이역배열 = Array(11)
+
+    for (const word of words) {
+        const 단어길이 = word.length
+        const 트라이1 = 트라이배열[단어길이] ? 트라이배열[단어길이] : new 트라이()
+        const 트라이2 = 트라이역배열[단어길이] ? 트라이역배열[단어길이] : new 트라이()
+        트라이1.insertData(word)
+        트라이2.insertData([...word].reverse().join(''))
+        트라이배열[단어길이] = 트라이1
+        트라이역배열[단어길이] = 트라이2
+    }
+
+    console.log(트라이배열)
+    console.log(트라이역배열)
+
+    return answer
+}
+
+solution(
+    ["frodo", "front", "frost", "frozen", "frame", "kakao"], 
+    ["fro??", "????o", "fr???", "fro???", "pro?"]
+)
+
+// -- section 6 --
+
+class 노드 {
+    constructor(){
+        this.children = {}
+        this.count = 0
+    }
+}
+
+class 트라이 {
+    constructor(){
+        this.root = new 노드()
+    }
+
+    insertData(word){
+        let current = this.root
+        current.count += 1
+        for (const s of word) {
+            let child = current.children[s]
+
+            if(!child) {
+                child = new 노드()
+                current.children[s] = child
+            }
+
+            child.count += 1
+            current = child
+        }
+    }
+
+    search(query){
+        let current = this.root
+        for (const q of query) {
+            if(q === '?') {
+                return current.count
+            } else if (!current.children[q]){
+                return 0;
+            }
+            current = current.children[q]
+        }
+    }
+}
+
+function solution(words, queries){
+    answer = []
+    
+    const 트라이배열 = Array(11)
+    const 트라이역배열 = Array(11)
+
+    for (const word of words) {
+        const 단어길이 = word.length
+        const 트라이1 = 트라이배열[단어길이] ? 트라이배열[단어길이] : new 트라이()
+        const 트라이2 = 트라이역배열[단어길이] ? 트라이역배열[단어길이] : new 트라이()
+        트라이1.insertData(word)
+        트라이2.insertData([...word].reverse().join(''))
+        트라이배열[단어길이] = 트라이1
+        트라이역배열[단어길이] = 트라이2
+    }
+
+    // console.log(트라이배열)
+    // console.log(트라이역배열)
+
+    for (const query of queries) {
+        if (!트라이배열[query.length]){
+            answer.push(0)
+            continue
+        }
+
+        let count
+
+        if(query[0] !== '?'){
+            count = 트라이배열[query.length].search(query)
+        } else {
+            count = 트라이역배열[query.length].search([...query].reverse().join(''))
+        }
+        answer.push(count)
+    }
+
+    return answer
+}
+
+let words = ["frodo", "front", "frost", "frozen", "frame", "kakao"]	
+let queries = ["fro??", "????o", "fr???", "fro???", "pro?"]
+
+solution(words, queries)
+```
