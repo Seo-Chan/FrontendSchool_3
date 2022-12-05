@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="txt">비밀번호 입력 : </label>
+        <input type="text" id="inp1" required pattern="(?=.*[!@#$%^&*()_+=-])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}">
+        <label for="txt">비밀번호 확인 : </label>
+        <input type="text" id="inp2" required pattern="(?=.*[!@#$%^&*()_+=-])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}">
+        <button>제출</button>
+    </form>
+
+    <script>
+        const inps = document.querySelectorAll('input');
+        const btn = document.querySelector('button');
+        const inp1 = document.querySelector('#inp1');
+        const inp2 = document.querySelector('#inp2');
+        btn.addEventListener('click', (event) => {
+            inps.forEach((item) => {
+                validate(item);
+            })
+        })
+        function validate(target) {
+            if (target.validity.valueMissing) {
+                target.setCustomValidity('아무것도 입력되지 않았다구요우!');
+            } else if (inp1 !== inp2) {
+                target.setCustomValidity('비밀번호 입력과 확인값이 다릅니다.');
+            } else if (target.validity.patternMismatch) {
+                target.setCustomValidity('비밀번호 형식이 틀려먹었습니다.');
+            } else {
+                target.setCustomValidity('');
+            }
+            console.log(target.validity);
+        }
+    </script>
+</body>
+
+</html>
