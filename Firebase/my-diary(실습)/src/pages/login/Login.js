@@ -17,6 +17,7 @@ export default function Login() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // submit후 새로고침을 막기위해
         console.log(email, password);
     }
 
